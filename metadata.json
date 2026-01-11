@@ -1,0 +1,8 @@
+
+{
+  "name": "PetPals Adoption Platform",
+  "description": "A comprehensive pet adoption mobile-first web app featuring pet discovery, detailed profiles, adoption applications, and profile management with a dark-themed aesthetic.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
