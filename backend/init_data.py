@@ -10,12 +10,13 @@ django.setup()
 
 from api.models import Pet, Shelter, User, ChatSession, Message, Application
 
-# 创建超级管理员 (如果不存在)
-if not User.objects.filter(username='admin').exists():
-    User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
-    print("超级管理员账号创建成功: admin / admin123")
-else:
-    print("超级管理员账号已存在")
+# 创建/更新超级管理员
+user, created = User.objects.get_or_create(username='admin', defaults={'email': 'admin@example.com'})
+user.set_password('admin123')
+user.is_superuser = True
+user.is_staff = True
+user.save()
+print("超级管理员账号已就绪: admin / admin123")
 
 # 清理现有数据
 Pet.objects.all().delete()
