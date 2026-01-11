@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     """用户模型，扩展Django内置用户"""
     phone = models.CharField('手机号', max_length=20, blank=True)
-    avatar = models.URLField('头像URL', blank=True)
+    avatar = models.CharField('头像URL', max_length=500, blank=True)
     location = models.CharField('位置', max_length=100, blank=True)
     bio = models.CharField('简介', max_length=200, blank=True)
     join_year = models.IntegerField('加入年份', default=2024)
@@ -58,7 +58,7 @@ class Pet(models.Model):
     gender = models.CharField('性别', max_length=10, choices=GENDER_CHOICES)
     category = models.CharField('分类', max_length=20, choices=CATEGORY_CHOICES)
     distance = models.CharField('距离', max_length=50, blank=True)
-    image_url = models.URLField('图片URL', blank=True)
+    image_url = models.CharField('图片URL', max_length=500, blank=True)
     weight = models.CharField('体重', max_length=50, blank=True)
     color = models.CharField('颜色', max_length=50, blank=True)
     size = models.CharField('体型', max_length=20, choices=SIZE_CHOICES, blank=True)
@@ -128,7 +128,7 @@ class Application(models.Model):
 class Shelter(models.Model):
     """救助机构模型"""
     name = models.CharField('名称', max_length=100)
-    avatar = models.URLField('头像URL', blank=True)
+    avatar = models.CharField('头像URL', max_length=500, blank=True)
     description = models.TextField('描述', blank=True)
     address = models.CharField('地址', max_length=200, blank=True)
     phone = models.CharField('联系电话', max_length=20, blank=True)
@@ -148,7 +148,7 @@ class ChatSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chat_sessions', verbose_name='用户')
     shelter = models.ForeignKey(Shelter, on_delete=models.CASCADE, null=True, blank=True, related_name='chat_sessions', verbose_name='救助机构')
     volunteer_name = models.CharField('志愿者姓名', max_length=100, blank=True)
-    avatar = models.URLField('头像URL', blank=True)
+    avatar = models.CharField('头像URL', max_length=500, blank=True)
     is_shelter = models.BooleanField('是否机构', default=False)
     created_at = models.DateTimeField('创建时间', auto_now_add=True)
     updated_at = models.DateTimeField('更新时间', auto_now=True)
@@ -189,7 +189,7 @@ class UserPet(models.Model):
     """用户拥有的宠物（我的宠物）"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='my_pets', verbose_name='用户')
     name = models.CharField('名字', max_length=100)
-    image = models.URLField('图片URL', blank=True)
+    image = models.CharField('图片URL', max_length=500, blank=True)
     created_at = models.DateTimeField('创建时间', auto_now_add=True)
     
     class Meta:
